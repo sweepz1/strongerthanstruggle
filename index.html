@@ -8,27 +8,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #005c69;      /* BC cedar */
-      --accent: #ff6f61;       /* BC pop */
+      --primary: #005c69;
+      --accent: #ff6f61;
       --success: #22c55e;
       --danger: #ef4444;
-      --glass: rgba(255,255,255,.75);
+      --liquid-glass: rgba(255, 255, 255, 0.25);
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); letter-spacing: -0.01em; line-height: 1.5; }
     h1,h2,h3 { font-family: 'Playfair Display', serif; letter-spacing: -0.02em; line-height: 1.2; }
-    .glass { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.4); }
+    .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
     .btn-primary { @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow hover:shadow-lg; }
     .btn-secondary { @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white font-semibold hover:bg-accent/90 transition-all duration-200 shadow hover:shadow-lg; }
     .nav-link { @apply relative text-gray-700 hover:text-primary font-medium after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full; }
     .stat-bar { background: #e5e7eb; border-radius: 999px; overflow: hidden; height: 8px; }
-    .stat-fill { height: 100%; border-radius: 999px; transition: width 0.5s cubic-bezier(.4,.0,.2,1); }
-    .choice-btn { transition: all 0.2s cubic-bezier(.4,.0,.2,1); border: 2px solid transparent; }
-    .choice-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-color: var(--primary); }
-    #fullscreen-game { position: fixed; inset: 0; z-50; background: #0f172a; display: none; flex-direction: column; }
+    .stat-fill { height: 100%; border-radius: 999px; transition: width 0.5s cubic-bezier(.4, .0, .2, 1); }
+    .choice-btn {
+      background: var(--liquid-glass);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: all 0.2s cubic-bezier(.4, .0, .2, 1);
+    }
+    .choice-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary);
+    }
+    #fullscreen-game {
+      position: fixed; inset: 0; z-50; background: #0f172a; display: none; flex-direction: column;
+    }
     #fullscreen-game.active { display: flex; }
-    #fullscreen-game .controls { position: absolute; top: 16px; right: 16px; display: flex; gap: 8px; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); padding: 8px; border-radius: 12px; }
-    #fullscreen-game .controls button { background: none; border: none; color: #fff; cursor: pointer; transition: opacity 0.2s; }
+    #fullscreen-game .controls {
+      position: absolute; top: 16px; right: 16px; display: flex; gap: 8px; background: rgba(0, 0, 0, .45); backdrop-filter: blur(4px); padding: 8px; border-radius: 12px;
+    }
+    #fullscreen-game .controls button {
+      background: none; border: none; color: #fff; cursor: pointer; transition: opacity 0.2s;
+    }
     #fullscreen-game .controls button:hover { opacity: 0.7; }
   </style>
 </head>
@@ -94,7 +109,7 @@
 </section>
 
 <!-- ==========  GAME  (generic youth story)  ========== -->
-<section id="game" class="py-20 bg-gradient-to-b from-bc-sky-50 to-white">
+<section id="game" class="py-20 bg-gradient-to-b from-blue-50 to-white">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-4xl font-bold text-primary">Stronger Than Struggle</h2>
     <p class="mt-2 text-gray-600">An interactive story about youth, homelessness and drug-toxicity.<br>Click the card to enter full-screen.</p>
@@ -157,20 +172,12 @@
 </footer>
 
 <script>
-  // ----------  LOCAL FILE MAPPER  (11 photos)  ----------
+  // ----------  LOCAL FILE MAPPER  (13 photos)  ----------
   const localMap = {
     "stressed.jpg": "stressed.jpg",
-    "stressed-2.jpg": "stressed.jpg",
-    "stressed-3.jpg": "stressed.jpg",
-    "stressed-4.jpg": "stressed.jpg",
     "happy.jpg": "happy.jpg",
-    "happy-2.jpg": "happy.jpg",
-    "happy-3.jpg": "happy.jpg",
-    "happy-4.jpg": "happy.jpg",
     "randompeople.jpg": "randompeople.jpg",
-    "randompeople-2.jpg": "randompeople.jpg",
     "group.jpg": "group.jpg",
-    "group-2.jpg": "group.jpg",
     "yes.jpg": "yes.jpg",
     "therapy.jpg": "therapy.jpg",
     "phonecall.jpg": "phonecall.jpg",
@@ -188,20 +195,20 @@
   // ----------  SCENES  (generic youth)  ----------
   const scenes = [
     {character:"stressed.jpg", name:"Your Friend", text:"A 19-year-old, couch-surfing since foster-care ended. Tonight they’re scrolling social media, feeling completely alone."},
-    {character:"stressed-2.jpg", name:"Your Friend", text:"They start to open up: 'I’ve been using downers to sleep. I don’t want to die—I just want the noise to stop.'"},
+    {character:"stressed.jpg", name:"Your Friend", text:"They start to open up: 'I’ve been using downers to sleep. I don’t want to die—I just want the noise to stop.'"},
     {character:"randompeople.jpg", name:"Youth Drop-In", text:"You walk them to the local youth hub. Staff greet them by first name—no ID, no questions asked."},
     {character:"yes.jpg", name:"Peer Worker", text:"A peer worker who’s lived experience says, “I was exactly where you are. You matter, and there’s a path.”"},
     {character:"therapy.jpg", name:"Counsellor", text:"Inside the hub, a counsellor offers same-day mental-health and substance-use support—free for any youth 12-24."},
     {character:"phonecall.jpg", name:"You", text:"Later you text the hub’s 24-hour chat to book them a follow-up while they’re still motivated."},
     {character:"happy.jpg", name:"Your Friend", text:"For the first time in months they laugh—genuinely. The worker gave them a take-home naloxone kit and showed how to use it."},
     {character:"group.jpg", name:"Youth Group", text:"At the weekly youth circle, everyone shares one small win. Your friend says, 'I slept 5 hours without using—tiny, but huge for me.'"},
-    {character:"stressed-3.jpg", name:"Your Friend", text:"A rough day: their backpack with ID and phone was stolen. Old panic creeps in."},
-    {character:"happy-2.jpg", name:"Your Friend", text:"They text you: 'The hub replaced my ID, gave me a bus pass, and a safe-place to charge my phone. I didn’t know places like this existed.'"},
-    {character:"randompeople-2.jpg", name:"New Friends", text:"They start showing up early to help set up chairs. Peer workers ask them to co-facilitate next week—paid honorarium."},
-    {character:"happy-3.jpg", name:"Your Friend", text:"Paycheque in hand, they buy groceries for the first time in a year. 'I forgot what fresh fruit tastes like.'"},
-    {character:"stressed-4.jpg", name:"Your Friend", text:"Life throws curve-balls: their ex-roommate texts, threatening to kick them out of the couch again."},
-    {character:"group-2.jpg", name:"Circle Check-In", text:"Stress spikes; old cravings return. The group does a 5-4-3-2-1 grounding exercise together."},
-    {character:"happy-4.jpg", name:"Recovery", text:"They choose to stay, breathe, and use the 24-hour chat instead of using alone. Hope re-ignites."},
+    {character:"stressed.jpg", name:"Your Friend", text:"A rough day: their backpack with ID and phone was stolen. Old panic creeps in."},
+    {character:"happy.jpg", name:"Your Friend", text:"They text you: 'The hub replaced my ID, gave me a bus pass, and a safe-place to charge my phone. I didn’t know places like this existed.'"},
+    {character:"randompeople.jpg", name:"New Friends", text:"They start showing up early to help set up chairs. Peer workers ask them to co-facilitate next week—paid honorarium."},
+    {character:"happy.jpg", name:"Your Friend", text:"Paycheque in hand, they buy groceries for the first time in a year. 'I forgot what fresh fruit tastes like.'"},
+    {character:"stressed.jpg", name:"Your Friend", text:"Life throws curve-balls: their ex-roommate texts, threatening to kick them out of the couch again."},
+    {character:"group.jpg", name:"Circle Check-In", text:"Stress spikes; old cravings return. The group does a 5-4-3-2-1 grounding exercise together."},
+    {character:"happy.jpg", name:"Recovery", text:"They choose to stay, breathe, and use the 24-hour chat instead of using alone. Hope re-ignites."},
     {character:"pill.jpg", name:"Critical Moment", text:"They find a blue pill stamped 'M30'—cheap, but likely fentanyl. This is an emergency."},
     {character:"resting.jpg", name:"Hospital", text:"Paramedics reverse the overdose with naloxone. Your friend sleeps in a safe bed—alive because you called 911."},
     {character:"911.jpg", name:"Emergency Response", text:"Emergency services arrive in 6 minutes. You did the right thing—no youth is turned away, no questions asked."}
