@@ -172,7 +172,7 @@
 </footer>
 
 <script>
-  // ----------  LOCAL FILE MAPPER  (13 photos)  ----------
+  // ----------  LOCAL FILE MAPPER  (11 photos)  ----------
   const localMap = {
     "stressed.jpg": "stressed.jpg",
     "happy.jpg": "happy.jpg",
@@ -182,7 +182,6 @@
     "therapy.jpg": "therapy.jpg",
     "phonecall.jpg": "phonecall.jpg",
     "pill.jpg": "pill.jpg",
-    "resting.jpg": "resting.jpg",
     "911.jpg": "911.jpg"
   };
 
@@ -226,7 +225,7 @@
   }
   function toggleMute(){ /* placeholder */ }
 
-  // ----------  RENDER  ----------
+  // ----------  RENDER  (with smooth stat-sliding)  ----------
   function render(prevState){
     const scene=scenes[state.scene>=scenes.length?scenes.length-1:state.scene];
     const imgUrl='./'+localMap[scene.character];   // local file
@@ -236,7 +235,7 @@
       document.getElementById(mode+'-story').textContent=scene.text;
     });
 
-    // stats
+    // stats (smooth slide)
     ['hope','stress','motivation'].forEach(stat=>{
       const val=state[stat];
       const min={hope:-5,stress:-5,motivation:0}[stat];
